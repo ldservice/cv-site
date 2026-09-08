@@ -48,6 +48,12 @@ function hrefBetween(from, to) {
 
 /* ------------------------------------------------------------- fragments */
 
+/** A field that is either one value for both languages or {en, uk}. */
+function perLang(value, code) {
+  if (!value) return "";
+  return typeof value === "string" ? value : value[code] || "";
+}
+
 function marginNote(text) {
   return text ? `<p class="margin-note">${esc(text)}</p>` : "";
 }
@@ -57,8 +63,11 @@ function filmCard(film, meta, t, base) {
   const poster = `${base}assets/posters/${meta.poster}-${t.code}.jpg`;
   const duration = (meta.duration && meta.duration[t.code]) || "";
   const badges = [t.videos.formats[format], duration].filter(Boolean);
-  const embed = meta.youtube ? `https://www.youtube-nocookie.com/embed/${meta.youtube}` : "";
-  const watchUrl = meta.youtube ? `https://youtu.be/${meta.youtube}` : meta.url || "";
+  /* Each film exists in two languages, so both `youtube` and `url` accept
+     either one value for both pages or {"en": "...", "uk": "..."}. */
+  const id = perLang(meta.youtube, t.code);
+  const embed = id ? `https://www.youtube-nocookie.com/embed/${id}` : "";
+  const watchUrl = id ? `https://youtu.be/${id}` : perLang(meta.url, t.code);
   const label = `${t.videos.watch}: ${film.title}`;
 
   const frame = embed
@@ -299,7 +308,7 @@ ${jsonLd(t, url, base)}
       ${marginNote(t.videos.margin)}
       <h2>${esc(t.videos.title)}</h2>
       <p class="lead">${esc(t.videos.lead)}</p>
-      ${site.videos.every((meta) => !meta.youtube && !meta.url) ? `<p class="note">${esc(t.videos.soonNote)}</p>` : ""}
+      ${site.videos.every((meta) => !perLang(meta.youtube, t.code) && !perLang(meta.url, t.code)) ? `<p class="note">${esc(t.videos.soonNote)}</p>` : ""}
       <div class="films">
         ${films}
       </div>
