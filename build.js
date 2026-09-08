@@ -182,13 +182,20 @@ function page(t) {
     })
     .join("\n        ");
 
-  const numbers = t.numbers.lines
-    .map(
-      (line) => `<div class="terminal__row">
+  /* The `cd` line is what makes the block honest: all three numbers are read
+     in one repository, and the reader can see which one. */
+  const numbers = [
+    t.numbers.cwd ? `<div class="terminal__row"><div class="cmd">${esc(t.numbers.cwd)}</div></div>` : "",
+  ]
+    .concat(
+      t.numbers.lines.map(
+        (line) => `<div class="terminal__row">
             <div class="cmd">${esc(line.cmd)}</div>
             <div><span class="out">${esc(line.out)}</span> <span class="lbl">${esc(line.label)}</span></div>
           </div>`
+      )
     )
+    .filter(Boolean)
     .join("\n          ");
 
   const skills = t.skills.groups

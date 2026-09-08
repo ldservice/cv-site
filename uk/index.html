@@ -116,12 +116,13 @@
       </div>
     </section>
 
-    <section class="numbers reveal" aria-label="Числа — просто з диска">
+    <section class="numbers reveal" aria-label="Один проєкт — просто з диска">
       <div class="terminal">
         <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="terminal__row"><div class="cmd">cd ~/projects/dental-ai</div></div>
           <div class="terminal__row">
             <div class="cmd">git log --oneline | wc -l</div>
-            <div><span class="out">603</span> <span class="lbl">комітів у боті клініки</span></div>
+            <div><span class="out">603</span> <span class="lbl">коміти</span></div>
           </div>
           <div class="terminal__row">
             <div class="cmd">ls workflows/*.json | wc -l</div>
@@ -129,14 +130,10 @@
           </div>
           <div class="terminal__row">
             <div class="cmd">ls docs/adr/*.md | wc -l</div>
-            <div><span class="out">32</span> <span class="lbl">архітектурних рішення (ADR)</span></div>
-          </div>
-          <div class="terminal__row">
-            <div class="cmd">ls out/*.mp4 | wc -l</div>
-            <div><span class="out">100</span> <span class="lbl">роликів без участі людини</span></div>
+            <div><span class="out">32</span> <span class="lbl">архітектурні рішення (ADR)</span></div>
           </div>
       </div>
-      <p class="note">Кожна цифра тут — вивід команди в живому репозиторії, станом на вересень 2026 року.</p>
+      <p class="note">Бот клініки — один із семи проєктів за 2026 рік. Кожна цифра — вивід команди в живому репозиторії, станом на вересень 2026 року.</p>
     </section>
 
     <section id="video">

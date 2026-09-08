@@ -116,12 +116,13 @@
       </div>
     </section>
 
-    <section class="numbers reveal" aria-label="Numbers, straight off the disk">
+    <section class="numbers reveal" aria-label="One project, straight off the disk">
       <div class="terminal">
         <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="terminal__row"><div class="cmd">cd ~/projects/dental-ai</div></div>
           <div class="terminal__row">
             <div class="cmd">git log --oneline | wc -l</div>
-            <div><span class="out">603</span> <span class="lbl">commits in the clinic bot</span></div>
+            <div><span class="out">603</span> <span class="lbl">commits</span></div>
           </div>
           <div class="terminal__row">
             <div class="cmd">ls workflows/*.json | wc -l</div>
@@ -131,12 +132,8 @@
             <div class="cmd">ls docs/adr/*.md | wc -l</div>
             <div><span class="out">32</span> <span class="lbl">architecture decision records</span></div>
           </div>
-          <div class="terminal__row">
-            <div class="cmd">ls out/*.mp4 | wc -l</div>
-            <div><span class="out">100</span> <span class="lbl">videos rendered with no human</span></div>
-          </div>
       </div>
-      <p class="note">Every figure here is the output of a command on a live repository, as of September 2026.</p>
+      <p class="note">The clinic bot — one of the seven projects of 2026. Every figure is the output of a command on the live repository, as of September 2026.</p>
     </section>
 
     <section id="video">
