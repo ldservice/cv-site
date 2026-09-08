@@ -1,0 +1,88 @@
+{
+  "baseUrl": "https://ldservice.github.io/cv-site",
+  "repoUrl": "",
+  "author": {
+    "name": "Leonid Dymenko",
+    "nameUk": "Леонід Димєнко",
+    "email": "dymenko@gmail.com",
+    "phone": "+380 63 233 22 80",
+    "linkedin": "https://www.linkedin.com/in/leadstrategist/",
+    "linkedinLabel": "linkedin.com/in/leadstrategist"
+  },
+  "languages": [
+    {
+      "code": "en",
+      "label": "EN",
+      "name": "English",
+      "href": "/"
+    },
+    {
+      "code": "uk",
+      "label": "UA",
+      "name": "Українська",
+      "href": "/uk/"
+    }
+  ],
+  "videos": [
+    {
+      "key": "02",
+      "poster": "cv-02",
+      "format": "landscape",
+      "surface": "estetium",
+      "youtube": "",
+      "url": "",
+      "duration": {
+        "en": "2:48",
+        "uk": "2:22"
+      }
+    },
+    {
+      "key": "01",
+      "poster": "cv-01",
+      "format": "portrait",
+      "surface": "paper",
+      "youtube": "",
+      "url": "",
+      "duration": {
+        "en": "4:18",
+        "uk": "4:28"
+      }
+    },
+    {
+      "key": "03",
+      "poster": "cv-03",
+      "format": "portrait",
+      "surface": "whiteboard",
+      "youtube": "",
+      "url": "",
+      "duration": {
+        "en": "5:07",
+        "uk": "4:45"
+      }
+    },
+    {
+      "key": "04",
+      "poster": "cv-04",
+      "format": "portrait",
+      "surface": "chalk",
+      "youtube": "",
+      "url": "",
+      "duration": {
+        "en": "3:12",
+        "uk": "2:59"
+      }
+    },
+    {
+      "key": "05",
+      "poster": "cv-05",
+      "format": "portrait",
+      "surface": "blueprint",
+      "youtube": "",
+      "url": "",
+      "duration": {
+        "en": "4:18",
+        "uk": "4:03"
+      }
+    }
+  ]
+}

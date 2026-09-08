@@ -1,0 +1,1013 @@
+/*
+ * Leonid Dymenko — CV site.
+ *
+ * The look is lifted straight from the video CV: the same two surfaces the
+ * films are drawn on. Light theme is `paper` (squared notebook, blue
+ * ballpoint, red margin rule); dark theme is `chalk` (dry cream chalk on a
+ * green board). Colours are the palettes from the render engine, unchanged —
+ * see SURFACES in the video pipeline.
+ */
+
+/* ---------------------------------------------------------------- tokens */
+
+:root {
+  color-scheme: light;
+
+  --bg: #f2efe4;
+  --text: #26334a;
+  --ink: #1b3a8f;
+  --accent: #c2410c;
+  --muted: #7c8598;
+  --rule: #b9c9e4;
+  --margin-rule: #dba3a8;
+  --card: #f7f5ee;
+  --card-edge: #1b3a8f;
+  --shadow: 0 10px 30px -22px rgba(27, 58, 143, 0.55);
+  --grain: 0.035;
+
+  --font-hand: "Caveat", "Neucha", "Segoe Script", cursive;
+  --font-note: "Neucha", "Caveat", cursive;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas,
+    "Courier New", monospace;
+
+  --sheet: 1120px;
+  --margin-col: 136px;
+  --grid-step: 32px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #1d2b24;
+  --text: #eae7dd;
+  --ink: #eae7dd;
+  --accent: #f4d35e;
+  --muted: #8b9a91;
+  --rule: #2b3d34;
+  --margin-rule: #33493d;
+  --card: #22322a;
+  --card-edge: #cfd6cb;
+  --shadow: 0 12px 34px -24px rgba(0, 0, 0, 0.9);
+  --grain: 0.05;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #1d2b24;
+    --text: #eae7dd;
+    --ink: #eae7dd;
+    --accent: #f4d35e;
+    --muted: #8b9a91;
+    --rule: #2b3d34;
+    --margin-rule: #33493d;
+    --card: #22322a;
+    --card-edge: #cfd6cb;
+    --shadow: 0 12px 34px -24px rgba(0, 0, 0, 0.9);
+    --grain: 0.05;
+  }
+}
+
+/* ------------------------------------------------------------------ base */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  /* The squared notebook. In chalk the ruling disappears, as on the board. */
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--rule) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--rule) 55%, transparent) 1px, transparent 1px);
+  background-size: var(--grid-step) var(--grid-step);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+[data-theme="dark"] body,
+body.is-dark {
+  background-image: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) body {
+    background-image: none;
+  }
+}
+
+/* Paper grain, exactly the feTurbulence layer the films put over the sheet. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: var(--grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' seed='7'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--ink);
+  text-decoration-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-color: var(--accent);
+}
+
+:focus-visible {
+  outline: 3px dashed var(--accent);
+  outline-offset: 3px;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--card);
+  padding: 10px 16px;
+  z-index: 100;
+}
+
+.skip:focus {
+  left: 12px;
+  top: 12px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------- hand-drawn box */
+
+/*
+ * Every frame on the page is one rectangle pushed around by a turbulence
+ * displacement — the CSS equivalent of what Rough.js does in the films. The
+ * border lives on a pseudo-element so the filter never touches the text.
+ */
+.sketch {
+  position: relative;
+}
+
+.sketch::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 2.2px solid var(--card-edge);
+  border-radius: 4px;
+  filter: url(#wobble-a);
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.sketch--b::before {
+  filter: url(#wobble-b);
+}
+
+.sketch--c::before {
+  filter: url(#wobble-c);
+}
+
+.sketch--accent::before {
+  border-color: var(--accent);
+}
+
+/* ---------------------------------------------------------------- layout */
+
+.sheet {
+  max-width: var(--sheet);
+  margin: 0 auto;
+  padding: 0 22px 0 22px;
+  position: relative;
+}
+
+@media (min-width: 1020px) {
+  .sheet {
+    padding-left: var(--margin-col);
+  }
+
+  /* The red rule of a school notebook, down the whole page. */
+  .sheet::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--margin-col) - 34px);
+    width: 1px;
+    background: var(--margin-rule);
+    opacity: 0.8;
+  }
+}
+
+section {
+  padding: 46px 0;
+  position: relative;
+}
+
+/* Marginalia: the notes the films write next to the drawing. */
+.margin-note {
+  font-family: var(--font-note);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.35;
+  margin: 0 0 18px;
+}
+
+@media (min-width: 1020px) {
+  .margin-note {
+    position: absolute;
+    left: calc(-1 * var(--margin-col) + 2px);
+    width: calc(var(--margin-col) - 48px);
+    top: 58px;
+    margin: 0;
+    text-align: right;
+    line-height: 1.28;
+    transform: rotate(-2deg);
+  }
+}
+
+@media (min-width: 1320px) {
+  :root {
+    --margin-col: 178px;
+  }
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-hand);
+  color: var(--ink);
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0;
+}
+
+h2 {
+  font-size: clamp(34px, 5vw, 46px);
+  margin-bottom: 22px;
+  display: inline-block;
+  padding-bottom: 12px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 100% 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M2 5.2 C 42 1.6, 78 7.2, 118 3.4 S 176 6.4, 198 4.2' fill='none' stroke='%23c2410c' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] h2 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M2 5.2 C 42 1.6, 78 7.2, 118 3.4 S 176 6.4, 198 4.2' fill='none' stroke='%23f4d35e' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) h2 {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M2 5.2 C 42 1.6, 78 7.2, 118 3.4 S 176 6.4, 198 4.2' fill='none' stroke='%23f4d35e' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+}
+
+h3 {
+  font-size: 26px;
+}
+
+p {
+  margin: 0 0 14px;
+}
+
+.lead {
+  font-size: 19px;
+  max-width: 64ch;
+}
+
+/* ------------------------------------------------------------------- bar */
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(6px);
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--rule) 70%, transparent);
+}
+
+.bar__in {
+  max-width: var(--sheet);
+  margin: 0 auto;
+  padding: 9px 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.bar__name {
+  font-family: var(--font-hand);
+  font-size: 25px;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.bar nav {
+  display: none;
+  gap: 16px;
+  margin-left: auto;
+}
+
+@media (min-width: 900px) {
+  .bar nav {
+    display: flex;
+  }
+}
+
+.bar nav a {
+  font-family: var(--font-note);
+  font-size: 17px;
+  color: var(--text);
+  text-decoration: none;
+  padding: 2px 0;
+  border-bottom: 1.5px solid transparent;
+}
+
+.bar nav a:hover {
+  border-bottom-color: var(--accent);
+}
+
+.bar__tools {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (min-width: 900px) {
+  .bar__tools {
+    margin-left: 0;
+  }
+}
+
+.lang {
+  display: flex;
+  gap: 2px;
+  font-family: var(--font-note);
+  font-size: 16px;
+}
+
+.lang a {
+  padding: 3px 9px;
+  text-decoration: none;
+  color: var(--muted);
+  border-radius: 3px;
+}
+
+.lang a[aria-current="true"] {
+  color: var(--bg);
+  background: var(--ink);
+}
+
+.theme-toggle {
+  font-family: var(--font-note);
+  font-size: 16px;
+  background: none;
+  border: 1.5px solid color-mix(in srgb, var(--ink) 40%, transparent);
+  color: var(--text);
+  border-radius: 4px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ----------------------------------------------------------------- hero */
+
+.hero {
+  padding-top: 44px;
+}
+
+.hero__grid {
+  display: grid;
+  gap: 30px;
+  align-items: start;
+}
+
+@media (min-width: 780px) {
+  .hero__grid {
+    grid-template-columns: 1fr 232px;
+    gap: 46px;
+  }
+}
+
+.hero__hi {
+  font-family: var(--font-note);
+  color: var(--muted);
+  font-size: 19px;
+  margin: 0 0 2px;
+}
+
+.hero h1 {
+  font-size: clamp(46px, 9vw, 84px);
+  margin-bottom: 6px;
+}
+
+.hero__role {
+  font-family: var(--font-hand);
+  font-size: clamp(26px, 4vw, 34px);
+  color: var(--accent);
+  line-height: 1.1;
+  margin: 0 0 4px;
+}
+
+.hero__role-note,
+.hero__location {
+  font-family: var(--font-note);
+  color: var(--muted);
+  font-size: 17px;
+  margin: 0;
+}
+
+.hero__pitch {
+  margin-top: 18px;
+  max-width: 56ch;
+}
+
+.hero__open {
+  display: inline-block;
+  font-family: var(--font-note);
+  font-size: 16px;
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+/* Photo taped to the sheet. */
+.photo {
+  position: relative;
+  margin: 8px auto 0;
+  width: 208px;
+  transform: rotate(-1.6deg);
+}
+
+.photo img {
+  width: 100%;
+  border-radius: 2px;
+  filter: saturate(0.92) contrast(1.02);
+}
+
+.photo::after,
+.photo__tape {
+  content: "";
+  position: absolute;
+  width: 76px;
+  height: 22px;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.photo::after {
+  top: -12px;
+  left: -16px;
+  transform: rotate(-8deg);
+}
+
+.photo__tape {
+  bottom: -12px;
+  right: -14px;
+  transform: rotate(-6deg);
+}
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 18px;
+  margin-top: 30px;
+}
+
+.btn {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-size: 22px;
+  line-height: 1;
+  padding: 12px 22px;
+  color: var(--ink);
+  text-decoration: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: var(--accent);
+}
+
+.btn:hover::before {
+  border-color: var(--accent);
+}
+
+.btn--primary {
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
+}
+
+/* --------------------------------------------------------------- numbers */
+
+.numbers {
+  padding-top: 10px;
+}
+
+.terminal {
+  font-family: var(--font-mono);
+  /* `--oneline` must not be glued into one glyph: these are real commands. */
+  font-variant-ligatures: none;
+  font-size: 14px;
+  line-height: 1.75;
+  background: #1d2b24;
+  color: #eae7dd;
+  border-radius: 6px;
+  padding: 22px 22px 18px;
+  overflow-x: auto;
+  box-shadow: var(--shadow);
+}
+
+/* On the chalk surface the board and the page are the same colour, so the
+   terminal needs an edge to stay a separate object. */
+[data-theme="dark"] .terminal {
+  background: #16211b;
+  border: 1px solid #2f4238;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .terminal {
+    background: #16211b;
+    border: 1px solid #2f4238;
+  }
+}
+
+.terminal .dots {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.terminal .dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.4px solid #8b9a91;
+}
+
+.terminal .cmd::before {
+  content: "$ ";
+  color: #f4d35e;
+}
+
+.terminal .cmd {
+  color: #cfd6cb;
+  white-space: pre;
+}
+
+.terminal .out {
+  color: #7ee787;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.terminal .lbl {
+  color: #8b9a91;
+}
+
+.terminal__row {
+  margin-bottom: 10px;
+}
+
+.note {
+  font-family: var(--font-note);
+  color: var(--muted);
+  font-size: 15px;
+  margin-top: 12px;
+}
+
+/* ---------------------------------------------------------------- videos */
+
+.films {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 34px 24px;
+  margin-top: 30px;
+}
+
+@media (min-width: 760px) {
+  .films {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* The widescreen film gets its own band: a 9:16 grid cell would either
+     crop it or leave a hole under it. */
+  .film--landscape {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .film--landscape .film__body {
+    max-width: 46ch;
+  }
+
+  .film--landscape h3 {
+    margin-top: 0;
+  }
+}
+
+.film {
+  position: relative;
+}
+
+.film__frame {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--card);
+  cursor: pointer;
+  display: block;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.film__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.film__frame:hover img {
+  transform: scale(1.02);
+}
+
+.film--portrait .film__frame {
+  aspect-ratio: 9 / 16;
+}
+
+.film--landscape .film__frame {
+  aspect-ratio: 16 / 9;
+}
+
+.film__play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.film__play span {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  border: 2.2px solid var(--ink);
+  display: grid;
+  place-items: center;
+  filter: url(#wobble-b);
+}
+
+.film__play span::after {
+  content: "";
+  border-left: 17px solid var(--ink);
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  margin-left: 5px;
+}
+
+.film__frame:hover .film__play span {
+  border-color: var(--accent);
+}
+
+.film__frame:hover .film__play span::after {
+  border-left-color: var(--accent);
+}
+
+.film__badges {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 6px;
+  font-family: var(--font-note);
+  font-size: 13px;
+}
+
+.film__badges span {
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  color: var(--text);
+  padding: 1px 8px;
+  border-radius: 3px;
+}
+
+.film__no {
+  font-family: var(--font-hand);
+  font-size: 22px;
+  color: var(--muted);
+}
+
+.film h3 {
+  margin-top: 16px;
+  font-size: 27px;
+}
+
+.film__surface {
+  font-family: var(--font-note);
+  color: var(--muted);
+  font-size: 15px;
+  margin: 0 0 8px;
+}
+
+.film__blurb {
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+.film__link {
+  font-family: var(--font-note);
+  font-size: 15px;
+}
+
+.film__soon {
+  position: absolute;
+  inset: auto 10px 10px 10px;
+  font-family: var(--font-note);
+  font-size: 14px;
+  text-align: center;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  color: var(--accent);
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+.film__embed {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  position: absolute;
+  inset: 0;
+}
+
+/* ------------------------------------------------------------ text parts */
+
+.skills__grid {
+  display: grid;
+  gap: 26px 30px;
+  margin-top: 26px;
+}
+
+@media (min-width: 760px) {
+  .skills__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.skill h3 {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.skill p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.jobs {
+  margin-top: 26px;
+  display: grid;
+  gap: 34px;
+}
+
+.job {
+  position: relative;
+  padding-left: 26px;
+}
+
+.job::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 12px;
+  bottom: -22px;
+  border-left: 2px dashed color-mix(in srgb, var(--ink) 35%, transparent);
+}
+
+.job:last-child::before {
+  bottom: 12px;
+}
+
+.job::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2.2px solid var(--accent);
+  background: var(--bg);
+  filter: url(#wobble-c);
+}
+
+.job__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+}
+
+.job__role {
+  font-family: var(--font-hand);
+  font-size: 26px;
+  color: var(--ink);
+}
+
+.job__period {
+  font-family: var(--font-note);
+  color: var(--accent);
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.job__org {
+  font-family: var(--font-note);
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+.job ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.job li {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.job li::marker {
+  color: var(--accent);
+}
+
+.edu {
+  margin-top: 8px;
+}
+
+.edu p {
+  font-size: 16px;
+}
+
+/* --------------------------------------------------------------- contact */
+
+.contact__cards {
+  display: grid;
+  gap: 22px 26px;
+  margin-top: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.contact__card {
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  padding: 20px 22px;
+  border-radius: 4px;
+}
+
+.contact__card h3 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.contact__card a {
+  font-size: 17px;
+  word-break: break-word;
+}
+
+.contact__card p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+  font-family: var(--font-note);
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.footer {
+  margin-top: 40px;
+  padding: 34px 0 54px;
+  border-top: 1px solid color-mix(in srgb, var(--rule) 80%, transparent);
+  font-family: var(--font-note);
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.footer strong {
+  font-family: var(--font-hand);
+  font-size: 21px;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.footer p {
+  margin: 0 0 6px;
+  max-width: 70ch;
+}
+
+/* -------------------------------------------------------------- reveal */
+
+/* Only hidden when the script that shows them back is actually running. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .reveal,
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .film__frame img {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------- print */
+
+@media print {
+  body {
+    background: #fff;
+    color: #1f1f1f;
+    font-size: 11pt;
+  }
+
+  body::after,
+  .bar,
+  .films,
+  .cta,
+  .margin-note,
+  .theme-toggle,
+  .footer__theme {
+    display: none !important;
+  }
+
+  .sheet {
+    padding: 0;
+    max-width: none;
+  }
+
+  .sheet::before {
+    display: none;
+  }
+
+  .sketch::before {
+    filter: none;
+  }
+
+  section {
+    padding: 12px 0;
+    break-inside: avoid;
+  }
+}

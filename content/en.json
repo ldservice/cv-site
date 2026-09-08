@@ -1,0 +1,166 @@
+{
+  "code": "en",
+  "meta": {
+    "title": "Leonid Dymenko — AI Workflow Engineer",
+    "description": "AI Workflow Engineer: a language model working inside a business process — n8n, PostgreSQL/pgvector, Python. Seven projects shipped in 2026, plus a video CV drawn by the same pipeline.",
+    "ogAlt": "A sheet of squared paper with a resume drawn on it in blue ballpoint"
+  },
+  "nav": {
+    "video": "Video CV",
+    "profile": "Profile",
+    "skills": "Skills",
+    "experience": "Experience",
+    "contact": "Contact",
+    "skip": "Skip to content"
+  },
+  "hero": {
+    "hi": "Hello, I am",
+    "name": "Leonid Dymenko",
+    "role": "AI Workflow Engineer",
+    "roleNote": "LLM-powered automation and backend · Python · n8n · PostgreSQL",
+    "location": "Kyiv, Ukraine · remote or hybrid",
+    "pitch": "I build systems where a language model works inside a business process: customer-facing bots, automation of routine operations, content-generation pipelines. In 2026 I took seven projects from an idea to a working stand.",
+    "margin": "the model writes the code — I write the conditions and the checks",
+    "photoAlt": "Photo: Leonid Dymenko",
+    "ctaVideo": "Watch the video CV",
+    "ctaPdf": "Download CV (PDF)",
+    "ctaMail": "Write to me",
+    "open": "Open to a test assignment"
+  },
+  "numbers": {
+    "title": "Numbers, straight off the disk",
+    "note": "Every figure here is the output of a command on a live repository, as of September 2026.",
+    "lines": [
+      { "cmd": "git log --oneline | wc -l", "out": "603", "label": "commits in the clinic bot" },
+      { "cmd": "ls workflows/*.json | wc -l", "out": "10", "label": "n8n workflows in production" },
+      { "cmd": "ls docs/adr/*.md | wc -l", "out": "32", "label": "architecture decision records" },
+      { "cmd": "ls out/*.mp4 | wc -l", "out": "100", "label": "videos rendered with no human" }
+    ]
+  },
+  "videos": {
+    "title": "A resume you can watch",
+    "lead": "The same resume told five times. Each film is drawn frame by frame by my own pipeline — the one described further down this page. Pick the surface you like: paper, whiteboard, chalk, blueprint.",
+    "margin": "made by the pipeline it is about",
+    "watch": "Play",
+    "watchOn": "Watch on YouTube",
+    "soon": "Publishing shortly",
+    "soonNote": "The film is rendered; the link goes live as soon as it is uploaded.",
+    "formats": { "portrait": "9:16", "landscape": "16:9" },
+    "items": [
+      {
+        "key": "01",
+        "title": "The Compiler",
+        "surface": "blue ballpoint on squared paper",
+        "blurb": "“If the model writes the code, the engineer is redundant” — that is what I heard at an interview this year. Four minutes on what I actually do while the model writes."
+      },
+      {
+        "key": "02",
+        "title": "The Puzzle",
+        "surface": "pencil on warm paper, widescreen",
+        "blurb": "A resume on a single sheet, except the sheet draws itself. Seven cards: who I am, the stack, the projects, the road since 2010, and how I check a model that can be wrong in a plausible way."
+      },
+      {
+        "key": "03",
+        "title": "The Interview",
+        "surface": "marker on a whiteboard, two voices",
+        "blurb": "“AI Workflow Engineer — isn't that a prompt engineer with a fancy title?” The recruiter asked straight, so I answered straight: I do write prompts, but nobody pays for those."
+      },
+      {
+        "key": "04",
+        "title": "The Terminal",
+        "surface": "chalk on a dark board",
+        "blurb": "A resume is usually read. This one you can run. Every number is the output of a command on a live repository — plus an honest answer to “do you write the code yourself?”"
+      },
+      {
+        "key": "05",
+        "title": "The Blueprint",
+        "surface": "drafting pen on blue, third person",
+        "blurb": "All the code is under NDA, and a recruiter has every right to call that buying blind. A system with a model inside it can be shown without a single line of code — like the drawing of a house."
+      }
+    ]
+  },
+  "profile": {
+    "title": "Profile",
+    "margin": "framing · decomposition · verification",
+    "paragraphs": [
+      "I design and build systems where an LLM works inside a production process: n8n + PostgreSQL/pgvector orchestration, Python bots and services, media-generation pipelines. Claude Code, the OpenAI and Gemini APIs are my primary development tools — code, migrations, workflows and documentation are born in a dialogue with a model and then checked by linters, tests and measurements on a stand.",
+      "My view: AI is the next compiler after assembly and high-level languages. Translating human language into a program means translating from a domain of high ambiguity into a domain of zero tolerance for paradox, and that translation is what I consider my actual job. Hence the core skills: problem framing, decomposition, control of invariants, verification of the result — while the programming language stays a tool that changes from project to project.",
+      "All the projects below live in private repositories under NDA; the code is not published, and I discuss architecture at the interview within what I am allowed to say. A detailed technical CV is available on request."
+    ]
+  },
+  "skills": {
+    "title": "Skills",
+    "margin": "the stack is a tool, not an identity",
+    "groups": [
+      { "name": "Languages and frameworks", "items": "Python 3.12 (FastAPI, aiogram, asyncio, pydantic, SQLAlchemy, pytest), TypeScript / JavaScript (Node.js, React, Remotion), SQL" },
+      { "name": "AI and LLM", "items": "Claude Code, Anthropic API, OpenAI API, Google Gemini (text, TTS), RAG on pgvector, prompt engineering, MCP servers, Whisper, Suno, ElevenLabs" },
+      { "name": "Automation", "items": "n8n (workflows in git, idempotency, error handling), Telegram Bot API and Mini Apps, ZennoPoster, scraping and browser automation" },
+      { "name": "Databases and infrastructure", "items": "PostgreSQL 16 + pgvector, Supabase, Docker Compose, WSL2, Linux, Git / GitHub, GitHub Actions (CI/CD), Railway" },
+      { "name": "Other", "items": "OCR pipelines (Marker, Surya, PyTorch), code-first CAD (CadQuery), ffmpeg, OBS, Webflow, WordPress, SEO" },
+      { "name": "Human languages", "items": "Ukrainian, Russian — native; English — intermediate, technical documentation and code" }
+    ]
+  },
+  "experience": {
+    "title": "Experience",
+    "margin": "seven projects in 2026",
+    "jobs": [
+      {
+        "role": "AI Workflow Engineer / Developer (self-employed)",
+        "period": "Jan 2026 — present",
+        "org": "Projects for the Estetium dental clinic and own products",
+        "items": [
+          { "lead": "Dental AI Automation.", "text": "Telegram bot on n8n + PostgreSQL/pgvector + LLM that answers patients' questions about services, sends appointment reminders and escalates complaints to staff. 10 production workflows, 32 architecture decision records, 200+ pull requests. Response time around 2 s." },
+          { "lead": "Video factory for social media.", "text": "TypeScript and Node.js pipeline: script, voice-over (Gemini TTS), in-frame drawing and rendering are assembled by scripts from JSON. 30 topic sections; series of 100 clips render on schedule with no human in the loop. Custom drawn-in-frame engine on Rough.js — the films at the top of this page came out of it." },
+          { "lead": "Song Service.", "text": "Telegram bot for HoReCa venues: a personalised song for a guest in 3–5 minutes via the Suno API. Python, aiogram, Supabase, CI/CD on GitHub Actions, tests, strict typing." },
+          { "lead": "Stream Director.", "text": "Python director for a live stream: drives OBS, reads YouTube and TikTok chat, voices the host via TTS, runs interactive viewer battles." },
+          { "lead": "OCR pipeline.", "text": "Recognition of 18 scanned PDFs on a local GPU and assembly of a single 130-page document with tables." }
+        ]
+      },
+      {
+        "role": "Marketing and Digital Strategy Specialist",
+        "period": "2025 — 2026",
+        "org": "Estetium dental clinic (Kyiv) and other projects",
+        "items": [
+          { "lead": "", "text": "Brand positioning, website migration and technical optimisation (Webflow, WordPress), SEO and JSON-LD structured data." },
+          { "lead": "", "text": "AI in content production: service videos with synthesised voice-over, audience analysis." }
+        ]
+      },
+      {
+        "role": "Automation and Algorithmic Analysis Developer (self-employed)",
+        "period": "2014 — 2025",
+        "org": "Online platforms, social networks",
+        "items": [
+          { "lead": "", "text": "Bot networks on ZennoPoster running hundreds of accounts at once: registration, templated actions, transaction accounting. Started with visual flowcharts; over the years moved on to database design and system architecture." },
+          { "lead": "", "text": "Analysis of odds, volatility and platform logic; risk-minimisation algorithms based on overlapping events." },
+          { "lead": "", "text": "Social media automation: the content managers' routine turned into templated processes." }
+        ]
+      }
+    ]
+  },
+  "education": {
+    "title": "Education",
+    "items": [
+      { "lead": "Master's degree in Electrical Engineering", "text": "electrical systems and power supply · National University of Food Technologies, Kyiv · 2010" },
+      { "lead": "CS50 and related computer science courses", "text": "algorithms, data structures, complexity analysis" }
+    ]
+  },
+  "contact": {
+    "title": "Let us talk",
+    "lead": "Remote or hybrid, open to a test assignment. The quickest way is email; LinkedIn works too.",
+    "margin": "write — and I will show you the stand",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "linkedinLabel": "LinkedIn",
+    "pdfLabel": "CV in PDF",
+    "pdfEn": "English, one page",
+    "pdfUk": "Ukrainian, one page"
+  },
+  "footer": {
+    "author": "Designed and built by Leonid Dymenko",
+    "made": "The hand-drawn look is taken from the video CV above: same palette, same handwriting, same squared paper.",
+    "rights": "© 2026 Leonid Dymenko. Code under MIT, texts and films — all rights reserved.",
+    "theme": "Theme",
+    "themeLight": "Paper",
+    "themeDark": "Chalk"
+  }
+}

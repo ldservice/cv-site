@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Draw-in is a JavaScript effect; without it nothing may ever be hidden. -->
+  <script>document.documentElement.classList.add("js");</script>
+  <title>Леонід Димєнко — AI Workflow Engineer</title>
+  <meta name="description" content="AI Workflow Engineer: мовна модель усередині робочого процесу — n8n, PostgreSQL/pgvector, Python. Сім проєктів за 2026 рік і відеорезюме, намальоване тим самим конвеєром.">
+  <meta name="author" content="Леонід Димєнко">
+  <link rel="canonical" href="https://ldservice.github.io/cv-site/uk/">
+  <link rel="alternate" hreflang="en" href="https://ldservice.github.io/cv-site/">
+  <link rel="alternate" hreflang="uk" href="https://ldservice.github.io/cv-site/uk/">
+  <link rel="alternate" hreflang="x-default" href="https://ldservice.github.io/cv-site/">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Леонід Димєнко — AI Workflow Engineer">
+  <meta property="og:description" content="AI Workflow Engineer: мовна модель усередині робочого процесу — n8n, PostgreSQL/pgvector, Python. Сім проєктів за 2026 рік і відеорезюме, намальоване тим самим конвеєром.">
+  <meta property="og:url" content="https://ldservice.github.io/cv-site/uk/">
+  <meta property="og:locale" content="uk_UA">
+  <meta property="og:image" content="https://ldservice.github.io/cv-site/assets/og-uk.jpg">
+  <meta property="og:image:alt" content="Аркуш у клітинку з резюме, намальованим синьою шариковою ручкою">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#f2efe4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d2b24" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Neucha&family=JetBrains+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Леонід Димєнко",
+  "jobTitle": "AI Workflow Engineer",
+  "description": "AI Workflow Engineer: мовна модель усередині робочого процесу — n8n, PostgreSQL/pgvector, Python. Сім проєктів за 2026 рік і відеорезюме, намальоване тим самим конвеєром.",
+  "email": "mailto:dymenko@gmail.com",
+  "telephone": "+380 63 233 22 80",
+  "url": "https://ldservice.github.io/cv-site/uk/",
+  "image": "https://ldservice.github.io/cv-site/uk/assets/photo.jpg",
+  "sameAs": [
+    "https://www.linkedin.com/in/leadstrategist/"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Kyiv",
+    "addressCountry": "UA"
+  },
+  "knowsLanguage": [
+    "uk",
+    "ru",
+    "en"
+  ],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "National University of Food Technologies"
+  }
+}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Перейти до вмісту</a>
+
+  <!-- One turbulence field, three seeds: every frame on the page is drawn
+       through it, the way the films are drawn through Rough.js. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="wobble-a"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4"/></filter>
+    <filter id="wobble-b"><feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.4"/></filter>
+    <filter id="wobble-c"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="19" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4"/></filter>
+  </svg>
+
+  <header class="bar">
+    <div class="bar__in">
+      <a class="bar__name" href="#top">Леонід Димєнко</a>
+      <nav aria-label="Профіль">
+        <a href="#video">Відеорезюме</a>
+        <a href="#profile">Профіль</a>
+        <a href="#skills">Навички</a>
+        <a href="#experience">Досвід</a>
+        <a href="#contact">Контакти</a>
+      </nav>
+      <div class="bar__tools">
+        <div class="lang">
+          <a href="../" data-lang-switch="en" hreflang="en" lang="en">EN</a>
+          <a href="./" data-lang-switch="uk" hreflang="uk" aria-current="true" lang="uk">UA</a>
+        </div>
+        <button type="button" class="theme-toggle" data-label-light="Папір" data-label-dark="Крейда" data-aria="Тема">Крейда</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="sheet">
+    <section class="hero" id="top">
+      <p class="margin-note">код пише модель — умови й перевірку пишу я</p>
+      <div class="hero__grid">
+        <div>
+          <p class="hero__hi">Вітаю, я</p>
+          <h1>Леонід Димєнко</h1>
+          <p class="hero__role">AI Workflow Engineer</p>
+          <p class="hero__role-note">Автоматизація з LLM і бекенд · Python · n8n · PostgreSQL</p>
+          <p class="hero__location">Київ, Україна · віддалено або гібрид</p>
+          <p class="hero__pitch">Будую системи, де мовна модель працює всередині робочого процесу: чат-боти для бізнесу, автоматизація рутинних операцій, конвеєри генерації контенту. За 2026 рік довів до працюючого стенду сім проєктів.</p>
+          <p class="hero__open">Готовий до тестового завдання</p>
+          <div class="cta">
+            <a class="btn btn--primary sketch" href="#video">Подивитися відеорезюме</a>
+            <a class="btn sketch sketch--b" href="../cv/CV-Dymenko-Leonid-uk.pdf" download>Завантажити резюме (PDF)</a>
+            <a class="btn sketch sketch--c" href="mailto:dymenko@gmail.com">Написати мені</a>
+          </div>
+        </div>
+        <figure class="photo sketch sketch--b">
+          <img src="../assets/photo.jpg" alt="Фото: Леонід Димєнко" width="416" height="554">
+          <span class="photo__tape" aria-hidden="true"></span>
+        </figure>
+      </div>
+    </section>
+
+    <section class="numbers reveal" aria-label="Числа — просто з диска">
+      <div class="terminal">
+        <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="terminal__row">
+            <div class="cmd">git log --oneline | wc -l</div>
+            <div><span class="out">603</span> <span class="lbl">комітів у боті клініки</span></div>
+          </div>
+          <div class="terminal__row">
+            <div class="cmd">ls workflows/*.json | wc -l</div>
+            <div><span class="out">10</span> <span class="lbl">робочих процесів n8n</span></div>
+          </div>
+          <div class="terminal__row">
+            <div class="cmd">ls docs/adr/*.md | wc -l</div>
+            <div><span class="out">32</span> <span class="lbl">архітектурних рішення (ADR)</span></div>
+          </div>
+          <div class="terminal__row">
+            <div class="cmd">ls out/*.mp4 | wc -l</div>
+            <div><span class="out">100</span> <span class="lbl">роликів без участі людини</span></div>
+          </div>
+      </div>
+      <p class="note">Кожна цифра тут — вивід команди в живому репозиторії, станом на вересень 2026 року.</p>
+    </section>
+
+    <section id="video">
+      <p class="margin-note">зроблено конвеєром, про який розповідає</p>
+      <h2>Резюме, яке можна подивитися</h2>
+      <p class="lead">Одне резюме, розказане п'ять разів. Кожен ролик малюється в кадрі моїм же конвеєром — тим самим, про який ідеться нижче на цій сторінці. Оберіть поверхню: папір, дошка, крейда, креслення.</p>
+      <p class="note">Ролик відрендерено; посилання з'явиться одразу після завантаження.</p>
+      <div class="films">
+        <article class="film film--landscape reveal">
+          <div class="sketch sketch--b film__shot"><div class="film__frame">
+            <img src="../assets/posters/cv-02-uk.jpg" alt="Пазл" loading="lazy" decoding="async">
+            <span class="film__badges"><span>16:9</span><span>2:22</span></span>
+            <span class="film__soon">Скоро опублікую</span>
+          </div></div>
+          <div class="film__body">
+            <h3>Пазл</h3>
+            <p class="film__surface">олівець по теплому паперу, широкий формат</p>
+            <p class="film__blurb">Резюме на одному аркуші, тільки аркуш малюється в кадрі. Сім карток: хто я, стек, проєкти, шлях з 2010-го і те, як я перевіряю модель, яка може помилитись правдоподібно.</p>
+            
+          </div>
+        </article>
+        <article class="film film--portrait reveal">
+          <div class="sketch sketch--b film__shot"><div class="film__frame">
+            <img src="../assets/posters/cv-01-uk.jpg" alt="Компілятор" loading="lazy" decoding="async">
+            <span class="film__badges"><span>9:16</span><span>4:28</span></span>
+            <span class="film__soon">Скоро опублікую</span>
+          </div></div>
+          <div class="film__body">
+            <h3>Компілятор</h3>
+            <p class="film__surface">синя шарикова по паперу в клітинку</p>
+            <p class="film__blurb">«Якщо код пише модель, інженер там зайвий» — так мені сказали на співбесіді цього року. Чотири хвилини про те, що я роблю, поки модель пише.</p>
+            
+          </div>
+        </article>
+        <article class="film film--portrait reveal">
+          <div class="sketch sketch--b film__shot"><div class="film__frame">
+            <img src="../assets/posters/cv-03-uk.jpg" alt="Співбесіда" loading="lazy" decoding="async">
+            <span class="film__badges"><span>9:16</span><span>4:45</span></span>
+            <span class="film__soon">Скоро опублікую</span>
+          </div></div>
+          <div class="film__body">
+            <h3>Співбесіда</h3>
+            <p class="film__surface">маркер по дошці, два голоси</p>
+            <p class="film__blurb">«AI Workflow Engineer — це промпт-інженер із гучною назвою?» Рекрутерка спитала прямо, і я відповів прямо: промпти пишу, але платять не за них.</p>
+            
+          </div>
+        </article>
+        <article class="film film--portrait reveal">
+          <div class="sketch sketch--b film__shot"><div class="film__frame">
+            <img src="../assets/posters/cv-04-uk.jpg" alt="Термінал" loading="lazy" decoding="async">
+            <span class="film__badges"><span>9:16</span><span>2:59</span></span>
+            <span class="film__soon">Скоро опублікую</span>
+          </div></div>
+          <div class="film__body">
+            <h3>Термінал</h3>
+            <p class="film__surface">крейда по темній дошці</p>
+            <p class="film__blurb">Резюме зазвичай читають. Це можна запустити. Кожне число — вивід команди з живого репозиторію. І чесна відповідь на «а код ви самі пишете?».</p>
+            
+          </div>
+        </article>
+        <article class="film film--portrait reveal">
+          <div class="sketch sketch--b film__shot"><div class="film__frame">
+            <img src="../assets/posters/cv-05-uk.jpg" alt="Креслення" loading="lazy" decoding="async">
+            <span class="film__badges"><span>9:16</span><span>4:03</span></span>
+            <span class="film__soon">Скоро опублікую</span>
+          </div></div>
+          <div class="film__body">
+            <h3>Креслення</h3>
+            <p class="film__surface">рейсфедер по синьому, третя особа</p>
+            <p class="film__blurb">Увесь код під NDA, і рекрутер має право на «кота в мішку». Систему з моделлю всередині можна показати без жодного рядка коду — як креслення будинку.</p>
+            
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="profile">
+      <p class="margin-note">постановка · декомпозиція · перевірка</p>
+      <h2>Профіль</h2>
+      <p class="lead reveal">Проєктую і будую системи, де LLM працює всередині виробничого процесу: оркестрація n8n + PostgreSQL/pgvector, Python-боти й сервіси, конвеєри генерації медіа. Claude Code, API OpenAI та Gemini — мої основні інструменти розробки: код, міграції, workflow і документація народжуються в діалозі з моделлю, а перевіряються лінтерами, тестами й замірами на стенді.</p>
+      <p class="lead reveal">Мій погляд: ШІ — це наступний рівень компілятора після асемблера й мов високого рівня. Переклад із людської мови в програмну — це переклад з області високої двозначності в область нульової терпимості до парадоксів, і саме цей переклад я вважаю своєю основною роботою. Тому головні навички — постановка задачі, декомпозиція, контроль інваріантів і верифікація результату, а мова програмування лишається інструментом, який змінюється від проєкту до проєкту.</p>
+      <p class="lead reveal">Усі проєкти нижче ведуться в приватних репозиторіях під NDA; код не публікується, деталі архітектури обговорюю на співбесіді в межах дозволеного. Технічну версію резюме надаю за запитом.</p>
+    </section>
+
+    <section id="skills">
+      <p class="margin-note">стек — інструмент, а не особистість</p>
+      <h2>Навички</h2>
+      <div class="skills__grid">
+          <div class="skill reveal">
+            <h3>Мови та фреймворки</h3>
+            <p>Python 3.12 (FastAPI, aiogram, asyncio, pydantic, SQLAlchemy, pytest), TypeScript / JavaScript (Node.js, React, Remotion), SQL</p>
+          </div>
+          <div class="skill reveal">
+            <h3>AI та LLM</h3>
+            <p>Claude Code, Anthropic API, OpenAI API, Google Gemini (текст, TTS), RAG на pgvector, prompt engineering, MCP-сервери, Whisper, Suno, ElevenLabs</p>
+          </div>
+          <div class="skill reveal">
+            <h3>Автоматизація</h3>
+            <p>n8n (workflow у git, ідемпотентність, обробка помилок), Telegram Bot API та Mini App, ZennoPoster, парсинг і браузерна автоматизація</p>
+          </div>
+          <div class="skill reveal">
+            <h3>Бази даних та інфраструктура</h3>
+            <p>PostgreSQL 16 + pgvector, Supabase, Docker Compose, WSL2, Linux, Git / GitHub, GitHub Actions (CI/CD), Railway</p>
+          </div>
+          <div class="skill reveal">
+            <h3>Інше</h3>
+            <p>OCR-конвеєри (Marker, Surya, PyTorch), CAD із коду (CadQuery), ffmpeg, OBS, Webflow, WordPress, SEO</p>
+          </div>
+          <div class="skill reveal">
+            <h3>Мови</h3>
+            <p>українська, російська — вільно; англійська — технічна документація і код</p>
+          </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <p class="margin-note">сім проєктів за 2026 рік</p>
+      <h2>Досвід</h2>
+      <div class="jobs">
+        <article class="job reveal">
+          <div class="job__head">
+            <h3 class="job__role">AI Workflow Engineer / розробник (самозайнятий)</h3>
+            <span class="job__period">січень 2026 — тепер</span>
+          </div>
+          <p class="job__org">Проєкти для стоматологічної клініки Estetium та власні продукти</p>
+          <ul>
+            <li><b>Dental AI Automation.</b> Telegram-бот на n8n + PostgreSQL/pgvector + LLM, який відповідає пацієнтам на питання про послуги, нагадує про прийом і передає скарги адміністратору. 10 робочих процесів, 32 архітектурні рішення, понад 200 pull request-ів. Час відповіді — близько 2 с.</li>
+            <li><b>Відеофабрика для соцмереж.</b> Конвеєр на TypeScript і Node.js: сценарій, озвучка (Gemini TTS), малюнок у кадрі та рендер збираються скриптами з JSON. 30 тематичних розділів, серії по 100 роликів рендеряться за розкладом без участі людини. Власний движок «малюнок будується в кадрі» на Rough.js — ролики на початку цієї сторінки вийшли саме з нього.</li>
+            <li><b>Song Service.</b> Telegram-бот для закладів HoReCa: персональна пісня для гостя за 3–5 хвилин через Suno API. Python, aiogram, Supabase, CI/CD на GitHub Actions, тести, суворий типовий контроль.</li>
+            <li><b>Stream Director.</b> Python-«режисер» ефіру: керує OBS, читає чат YouTube і TikTok, озвучує ведучого через TTS, веде інтерактивні батли глядачів.</li>
+            <li><b>OCR-конвеєр.</b> Розпізнавання 18 сканованих PDF на локальному GPU і збірка єдиного документа на 130 сторінок із таблицями.</li>
+          </ul>
+        </article>
+        <article class="job reveal">
+          <div class="job__head">
+            <h3 class="job__role">Маркетолог, спеціаліст із цифрових стратегій</h3>
+            <span class="job__period">2025 — 2026</span>
+          </div>
+          <p class="job__org">Стоматологічна клініка Estetium (Київ) та інші проєкти</p>
+          <ul>
+            <li>Позиціонування бренду, міграція та технічна оптимізація сайту (Webflow, WordPress), SEO і структуровані дані JSON-LD.</li>
+            <li>Впровадження ШІ у виробництво контенту: відео послуг із синтезованою озвучкою, аналіз аудиторії.</li>
+          </ul>
+        </article>
+        <article class="job reveal">
+          <div class="job__head">
+            <h3 class="job__role">Розробник систем автоматизації та алгоритмічного аналізу (самозайнятий)</h3>
+            <span class="job__period">2014 — 2025</span>
+          </div>
+          <p class="job__org">Онлайн-платформи, соціальні мережі</p>
+          <ul>
+            <li>Мережі ботів на ZennoPoster на сотні акаунтів: реєстрація, шаблонізовані дії, облік операцій. Почав з візуальних блок-схем, з роками дійшов до проєктування баз даних і архітектури систем.</li>
+            <li>Аналіз коефіцієнтів, волатильності та логіки онлайн-платформ; алгоритми мінімізації ризику через перекриття подій.</li>
+            <li>Автоматизація ведення соціальних мереж: рутина контент-менеджерів переведена у шаблонізовані процеси.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Освіта</h2>
+      <div class="edu reveal">
+          <p><b>Магістр з електротехніки</b> — електричні системи та електропостачання · НУХТ, Київ · 2010</p>
+          <p><b>CS50 та суміжні курси з комп'ютерних наук</b> — алгоритми, структури даних, оцінка складності</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <p class="margin-note">напишіть — покажу стенд</p>
+      <h2>Поговорімо</h2>
+      <p class="lead">Віддалено або гібрид, готовий до тестового завдання. Найшвидше — поштою; LinkedIn теж працює.</p>
+      <div class="contact__cards">
+        <div class="contact__card sketch reveal">
+          <h3>Пошта</h3>
+          <a href="mailto:dymenko@gmail.com">dymenko@gmail.com</a>
+        </div>
+        <div class="contact__card sketch sketch--b reveal">
+          <h3>Телефон</h3>
+          <a href="tel:+380632332280">+380 63 233 22 80</a>
+        </div>
+        <div class="contact__card sketch sketch--c reveal">
+          <h3>LinkedIn</h3>
+          <a href="https://www.linkedin.com/in/leadstrategist/" target="_blank" rel="noopener">linkedin.com/in/leadstrategist</a>
+        </div>
+        <div class="contact__card sketch reveal">
+          <h3>Резюме в PDF</h3>
+          <a href="../cv/CV-Dymenko-Leonid-en.pdf" download>EN</a> · <a href="../cv/CV-Dymenko-Leonid-uk.pdf" download>UA</a>
+          <p>українською, одна сторінка</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p><strong>Сайт зробив Леонід Димєнко</strong></p>
+      <p>Вигляд узято з відеорезюме вище: та сама палітра, той самий почерк, той самий папір у клітинку.</p>
+      <p>© 2026 Леонід Димєнко. Код — MIT, тексти й ролики — усі права застережено.</p>
+    </footer>
+  </main>
+
+  <script src="../assets/main.js" defer></script>
+</body>
+</html>

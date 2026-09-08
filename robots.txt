@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ldservice.github.io/cv-site/sitemap.xml
