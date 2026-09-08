@@ -124,6 +124,9 @@ body::after {
 
 img {
   max-width: 100%;
+  /* Without this the width/height attributes keep the intrinsic height while
+     CSS scales the width, and every picture comes out squeezed sideways. */
+  height: auto;
   display: block;
 }
 
@@ -474,6 +477,9 @@ p {
 
 .photo img {
   width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
   border-radius: 2px;
   filter: saturate(0.92) contrast(1.02);
 }

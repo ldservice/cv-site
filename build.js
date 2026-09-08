@@ -290,7 +290,7 @@ ${jsonLd(t, url, base)}
           </div>
         </div>
         <figure class="photo sketch sketch--b">
-          <img src="${base}assets/photo.jpg" alt="${esc(t.hero.photoAlt)}" width="416" height="554">
+          <img src="${base}assets/photo.jpg" alt="${esc(t.hero.photoAlt)}" width="600" height="800">
           <span class="photo__tape" aria-hidden="true"></span>
         </figure>
       </div>
