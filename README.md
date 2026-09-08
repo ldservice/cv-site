@@ -1,146 +1,45 @@
-# Сайт-визитка — Leonid Dymenko
+# CV site — Leonid Dymenko
 
-Статический сайт резюме: английская версия в корне, украинская в `/uk/`. Хостинг — GitHub
-Pages. Дизайн взят из видеорезюме (`docs/CV-MODULE.md` в проекте Remotion): та же палитра
-`paper` в светлой теме и `chalk` в тёмной, те же почерки Caveat и Neucha, та же бумага в
-клетку и дрожащие рамки — только вместо Rough.js их рисует SVG-фильтр турбулентности.
+A one-page résumé site in English (`/`) and Ukrainian (`/uk/`), with five video CVs
+embedded from YouTube. Live at **https://ldservice.github.io/cv-site/**
 
-**Автор — Леонид Дименко.** Код сайта под MIT (`LICENSE`), тексты и ролики — нет.
+The look is not a theme picked off a shelf: it is the surface the films themselves are
+drawn on. Light is squared notebook paper in blue ballpoint, dark is chalk on a green
+board — the same palettes, the same two handwriting faces, the same wobbly frames, drawn
+here by an SVG turbulence filter instead of Rough.js.
 
-## Что внутри
+## Build
 
-| Путь | Что это |
+No dependencies, no framework, no build step beyond one Node script.
+
+```bash
+node build.js     # content/*.json → index.html, uk/index.html, sitemap.xml, robots.txt
+node serve.js     # local preview on http://localhost:4173
+```
+
+`index.html` and `uk/index.html` are generated — edit the text in `content/*.json` and
+rebuild. Each language is a real page with its own title, description, canonical and
+hreflang: a résumé has to be readable by a search engine and by a recruiter with
+JavaScript switched off. What JavaScript adds is the theme switch, the draw-in on scroll,
+and loading a video player only once someone clicks a film — until then the page makes no
+request to YouTube and sets no cookies.
+
+## Layout
+
+| Path | What it is |
 |---|---|
-| `content/site.json` | адрес сайта, контакты, список роликов (сюда вписываются ID с YouTube) |
-| `content/en.json`, `content/uk.json` | весь текст страницы, по файлу на язык |
-| `build.js` | генератор: три JSON → `index.html` и `uk/index.html`, `sitemap.xml`, `robots.txt` |
-| `assets/style.css` | одна таблица стилей, две поверхности (бумага / мел) |
-| `assets/main.js` | тема, подгрузка видео по клику, появление блоков при прокрутке |
-| `assets/posters/` | кадры из роликов, по два на ролик (en/uk) |
-| `assets/og-*.jpg` | картинки предпросмотра для соцсетей |
-| `cv/*.pdf` | резюме на одну страницу, английское и украинское |
-| `serve.js` | локальный просмотр: `node serve.js` → http://localhost:4173 |
-| `publish.ps1` | выкладка папки `site/` в отдельный публичный репозиторий |
-| `index.html`, `uk/index.html` | **сгенерированы**, руками не править |
+| `content/site.json` | site URL, contacts, the list of films and their YouTube ids |
+| `content/en.json`, `content/uk.json` | every string on the page, one file per language |
+| `build.js` | the generator |
+| `assets/style.css` | one stylesheet, two surfaces |
+| `assets/main.js` | theme, click-to-play embeds, reveal on scroll |
+| `assets/posters/` | frames taken from the films, two per film |
+| `cv/*.pdf` | the one-page résumé, English and Ukrainian |
 
-## Рабочий цикл
+## Author
 
-```bash
-node build.js     # после любой правки JSON, CSS или build.js
-node serve.js     # посмотреть на http://localhost:4173
-```
+Written and designed by **Leonid Dymenko** — AI Workflow Engineer, Kyiv.
+The films are made by his own rendering pipeline; this page is about the same work.
 
-Текст правится только в `content/*.json`. `index.html` перезаписывается сборщиком.
-
-## Как добавить ролики
-
-Ролики лежат в `D:\Remotion\out\cv\` (`cv-0N.mp4` — украинские, `cv-en-0N.mp4` —
-английские). Сайт их не раздаёт: файлы по 80–160 МБ, GitHub Pages не для этого. Порядок:
-
-1. Загрузить ролик на YouTube (две языковые версии — отдельными видео).
-2. Взять ID из адреса: `https://youtu.be/**dQw4w9WgXcQ**`.
-3. Вписать его в `content/site.json` в строку нужного ролика:
-
-```json
-{ "key": "01", "poster": "cv-01", "format": "portrait", "youtube": "dQw4w9WgXcQ", ... }
-```
-
-4. `node build.js` — плашка «Скоро опубликую» исчезнет, появится кнопка воспроизведения.
-
-Если ролик не на YouTube (Instagram, TikTok, Vimeo), оставить `youtube` пустым и вписать
-`"url": "https://www.instagram.com/reel/..."` — карточка станет ссылкой, открывающейся в
-новой вкладке. Встроенный плеер в этом случае не делается намеренно: Instagram не даёт
-встраивать Reels без своего скрипта, а тащить его на страницу резюме не стоит.
-
-Ключ `key` привязан к постерам (`assets/posters/cv-0N-{en,uk}.jpg`), порядок карточек на
-странице — это порядок массива `videos`; широкоформатный ролик идёт первым и занимает всю
-ширину.
-
-Новые постеры, если ролики пересняты:
-
-```bash
-ffmpeg -ss 105 -i "D:/Remotion/out/cv/cv-en-02.mp4" -frames:v 1 -vf scale=960:-2 -q:v 4 assets/posters/cv-02-en.jpg
-```
-
-Кадр брать ближе к концу акта: в середине рисунок ещё дописывается и текст обрывается на
-полуслове.
-
-## Публикация на GitHub Pages
-
-Репозиторий `D:\projects\cv` **приватный и должен таким остаться**: в нём телефон, почта,
-переписка с компаниями в `jobscout/`, черновики резюме. GitHub Pages раздаёт весь
-репозиторий, поэтому сайт выкладывается в **отдельный публичный** репозиторий, куда
-попадает только папка `site/`.
-
-1. Создать на GitHub пустой публичный репозиторий, например `cv-site`.
-2. Вписать будущий адрес в `content/site.json` → `baseUrl` (от него считаются canonical,
-   hreflang и ссылки на og-картинки) и пересобрать: `node build.js`.
-3. Закоммитить изменения в приватном репозитории.
-4. Вытолкнуть папку в публичный:
-
-```powershell
-powershell -File site\publish.ps1 -Remote https://github.com/<имя>/cv-site.git
-```
-
-5. В настройках публичного репозитория: Settings → Pages → Source: `Deploy from a branch`,
-   ветка `main`, папка `/ (root)`. Через минуту сайт живой на
-   `https://<имя>.github.io/cv-site/`.
-
-Скрипт делает `git subtree split` по папке `site/` и `git push` в ветку `main` удалённого
-репозитория — история публичного репозитория содержит только файлы сайта.
-
-### Свой домен
-
-Когда появится домен: положить файл `CNAME` с одной строкой (`cv.example.com`) в корень
-папки `site/`, обновить `baseUrl`, пересобрать, опубликовать. В DNS — `CNAME` на
-`<имя>.github.io` (или четыре `A`-записи GitHub для корневого домена). Дальше Settings →
-Pages → Custom domain и галочка Enforce HTTPS.
-
-`.nojekyll` уже лежит в корне: без него GitHub Pages прогоняет сайт через Jekyll и
-игнорирует папки, начинающиеся с подчёркивания.
-
-## Решения и почему так
-
-**Генератор, а не одна страница с переключением языков на JS.** Резюме читают поисковики и
-рекрутеры с выключенным JavaScript. Каждый язык — отдельная страница со своим `<title>`,
-описанием, canonical и hreflang; переключатель — обычные ссылки. Выбранный язык
-запоминается в `localStorage` и применяется при следующем заходе.
-
-**Видео грузится только после клика.** До клика в карточке лежит кадр из ролика, а не
-iframe: страница не тянет плеер YouTube и не ставит куки тем, кто пришёл читать текст.
-Домен встраивания — `youtube-nocookie.com`.
-
-**Две поверхности вместо «светлой и тёмной темы».** Это не инверсия цветов, а те самые две
-поверхности, на которых нарисованы ролики: `paper` (#f2efe4, синяя шариковая, красное
-поле) и `chalk` (#1d2b24, мел, жёлтый акцент). Значения взяты из `SURFACES` движка
-рисования без изменений. Переключатель в шапке, по умолчанию — системная тема.
-
-**Появление блоков при прокрутке сделано на обработчике `scroll`, а не на
-`IntersectionObserver`.** CSS прячет блоки, поэтому то, что показывает их обратно, обязано
-срабатывать везде — во встроенных браузерах мессенджеров, в инструментах скриншотов, в
-эмулированном окне, где наблюдатель может не вызваться ни разу. Пропущенный вызов здесь —
-это резюме, которое никто не прочитает. Блоки прячутся только при наличии класса `js` на
-`<html>`, который ставит встроенный скрипт в `<head>`.
-
-**Числа в терминале.** Блок с командами и выводом — та же идея, что в ролике «Терминал»:
-не «более 600 коммитов», а команда и её вывод. Лигатуры в моноширинном шрифте выключены,
-иначе `--oneline` склеивается в один глиф и перестаёт быть командой (та же ловушка, что с
-«fl» в PDF-резюме).
-
-**Личные данные.** На странице есть телефон и почта — так же, как в PDF-резюме. Если
-телефон на публичном сайте не нужен, убрать карточку «Телефон» в `build.js` и поле `phone`
-в `content/site.json`; на PDF это не влияет.
-
-## Ловушки
-
-1. **`index.html` и `uk/index.html` — сгенерированы.** Правка руками исчезнет при следующем
-   `node build.js`. Текст живёт в `content/*.json`.
-2. **`baseUrl` без слеша в конце не страшен, а лишний путь — да.** Из него собираются
-   абсолютные адреса og-картинок; если там неправда, соцсети покажут пустой предпросмотр.
-3. **Постеры должны быть парными** — `cv-0N-en.jpg` и `cv-0N-uk.jpg`. Нет файла — будет
-   битая картинка, сборщик этого не проверяет.
-4. **Шрифты тянутся с Google Fonts.** Без сети страница читается системным шрифтом и
-   выглядит иначе; если это важно — положить `.woff2` в `assets/fonts/` и заменить `<link>`
-   на `@font-face`.
-5. **В Caveat нет «ґ».** В фамилии Димєнко это не мешает («є» в наборе есть), но слово с
-   «ґ» нарисуется запасным шрифтом и выпадет из стиля.
+Code is MIT (see `LICENSE`). The résumé texts, the photograph and the films are not:
+all rights reserved.
