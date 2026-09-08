@@ -281,25 +281,30 @@ ${jsonLd(t, url, base)}
   <main id="main" class="sheet">
     <section class="hero" id="top">
       ${marginNote(t.hero.margin)}
+      <!-- Four grid children, not two: on a phone the photo sits beside the
+           name, on a wide screen it stands next to the whole block. Which is
+           where, is decided by grid-template-areas in the stylesheet. -->
       <div class="hero__grid">
-        <div>
+        <div class="hero__id">
           <p class="hero__hi">${esc(t.hero.hi)}</p>
           <h1>${esc(t.hero.name)}</h1>
           <p class="hero__role">${esc(t.hero.role)}</p>
-          <p class="hero__role-note">${esc(t.hero.roleNote)}</p>
-          <p class="hero__location">${esc(t.hero.location)}</p>
-          <p class="hero__pitch">${esc(t.hero.pitch)}</p>
-          <p class="hero__open">${esc(t.hero.open)}</p>
-          <div class="cta">
-            <a class="btn btn--primary sketch" href="#video">${esc(t.hero.ctaVideo)}</a>
-            <a class="btn sketch sketch--b" href="${esc(ownPdf)}" download>${esc(t.hero.ctaPdf)}</a>
-            <a class="btn sketch sketch--c" href="mailto:${esc(a.email)}">${esc(t.hero.ctaMail)}</a>
-          </div>
         </div>
         <figure class="photo sketch sketch--b">
           <img src="${base}assets/photo.jpg" alt="${esc(t.hero.photoAlt)}" width="600" height="800">
           <span class="photo__tape" aria-hidden="true"></span>
         </figure>
+        <div class="hero__say">
+          <p class="hero__role-note">${esc(t.hero.roleNote)}</p>
+          <p class="hero__location">${esc(t.hero.location)}</p>
+          <p class="hero__pitch">${esc(t.hero.pitch)}</p>
+          <p class="hero__open">${esc(t.hero.open)}</p>
+        </div>
+        <div class="cta">
+          <a class="btn btn--primary sketch" href="#video">${esc(t.hero.ctaVideo)}</a>
+          <a class="btn sketch sketch--b" href="${esc(ownPdf)}" download>${esc(t.hero.ctaPdf)}</a>
+          <a class="btn sketch sketch--c" href="mailto:${esc(a.email)}">${esc(t.hero.ctaMail)}</a>
+        </div>
       </div>
     </section>
 

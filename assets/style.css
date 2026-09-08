@@ -34,7 +34,10 @@
 
   --sheet: 1120px;
   --margin-col: 136px;
-  --grid-step: 32px;
+  /* Phone first: every base value below is the one a 320-430px screen gets,
+     and the min-width layers add back what a wide screen can afford. */
+  --grid-step: 24px;
+  --bar-h: 52px;
 }
 
 [data-theme="dark"] {
@@ -81,7 +84,8 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 84px;
+  /* Anchors must clear the sticky bar, and the bar is shorter on a phone. */
+  scroll-padding-top: calc(var(--bar-h) + 14px);
 }
 
 body {
@@ -94,8 +98,8 @@ body {
   background-size: var(--grid-step) var(--grid-step);
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.62;
+  font-size: 16.5px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -207,8 +211,14 @@ a:hover {
 .sheet {
   max-width: var(--sheet);
   margin: 0 auto;
-  padding: 0 22px 0 22px;
+  padding: 0 16px;
   position: relative;
+}
+
+@media (min-width: 560px) {
+  .sheet {
+    padding: 0 22px;
+  }
 }
 
 @media (min-width: 1020px) {
@@ -230,8 +240,24 @@ a:hover {
 }
 
 section {
-  padding: 46px 0;
+  padding: 34px 0;
   position: relative;
+}
+
+@media (min-width: 760px) {
+  :root {
+    --grid-step: 32px;
+    --bar-h: 60px;
+  }
+
+  body {
+    font-size: 17px;
+    line-height: 1.62;
+  }
+
+  section {
+    padding: 46px 0;
+  }
 }
 
 /* Marginalia: the notes the films write next to the drawing. */
@@ -273,8 +299,8 @@ h3 {
 }
 
 h2 {
-  font-size: clamp(34px, 5vw, 46px);
-  margin-bottom: 22px;
+  font-size: clamp(30px, 8vw, 46px);
+  margin-bottom: 20px;
   display: inline-block;
   padding-bottom: 12px;
   background-repeat: no-repeat;
@@ -302,8 +328,14 @@ p {
 }
 
 .lead {
-  font-size: 19px;
+  font-size: 17px;
   max-width: 64ch;
+}
+
+@media (min-width: 760px) {
+  .lead {
+    font-size: 19px;
+  }
 }
 
 /* ------------------------------------------------------------------- bar */
@@ -320,18 +352,34 @@ p {
 .bar__in {
   max-width: var(--sheet);
   margin: 0 auto;
-  padding: 9px 22px;
+  padding: 4px 16px;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 10px;
+  min-height: var(--bar-h);
+}
+
+@media (min-width: 560px) {
+  .bar__in {
+    padding: 4px 22px;
+    gap: 18px;
+  }
 }
 
 .bar__name {
   font-family: var(--font-hand);
-  font-size: 25px;
+  font-size: 21px;
   color: var(--ink);
   text-decoration: none;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 560px) {
+  .bar__name {
+    font-size: 25px;
+  }
 }
 
 .bar nav {
@@ -379,8 +427,12 @@ p {
   font-size: 16px;
 }
 
+/* 44px is the floor for anything a thumb has to hit. */
 .lang a {
-  padding: 3px 9px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 11px;
   text-decoration: none;
   color: var(--muted);
   border-radius: 3px;
@@ -398,7 +450,11 @@ p {
   border: 1.5px solid color-mix(in srgb, var(--ink) 40%, transparent);
   color: var(--text);
   border-radius: 4px;
-  padding: 3px 10px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -410,31 +466,67 @@ p {
 /* ----------------------------------------------------------------- hero */
 
 .hero {
-  padding-top: 44px;
+  padding-top: 26px;
 }
 
+/*
+ * On a phone the photo is a neighbour of the name — face, name and role fit
+ * the first screen together. From 780px it steps aside and stands next to the
+ * whole block, as a photo taped to a sheet of paper.
+ */
 .hero__grid {
   display: grid;
-  gap: 30px;
+  grid-template-columns: minmax(0, 1fr) 118px;
+  grid-template-areas:
+    "id photo"
+    "say say"
+    "cta cta";
+  column-gap: 16px;
+  row-gap: 22px;
   align-items: start;
 }
 
-@media (min-width: 780px) {
+.hero__id {
+  grid-area: id;
+}
+
+.hero__grid .photo {
+  grid-area: photo;
+}
+
+.hero__say {
+  grid-area: say;
+}
+
+.hero__grid .cta {
+  grid-area: cta;
+}
+
+@media (min-width: 700px) {
+  .hero {
+    padding-top: 44px;
+  }
+
   .hero__grid {
-    grid-template-columns: 1fr 232px;
-    gap: 46px;
+    grid-template-columns: minmax(0, 1fr) 232px;
+    grid-template-areas:
+      "id photo"
+      "say photo"
+      "cta photo";
+    column-gap: 46px;
+    row-gap: 0;
   }
 }
 
 .hero__hi {
   font-family: var(--font-note);
   color: var(--muted);
-  font-size: 19px;
+  font-size: 18px;
   margin: 0 0 2px;
 }
 
 .hero h1 {
-  font-size: clamp(46px, 9vw, 84px);
+  font-size: clamp(38px, 11vw, 84px);
   margin-bottom: 6px;
 }
 
@@ -454,9 +546,18 @@ p {
   margin: 0;
 }
 
+/* The stack and the city are full-width lines: the photo is only as tall as
+   the name beside it, and squeezing them into that column costs two extra
+   wraps for nothing. */
 .hero__pitch {
-  margin-top: 18px;
+  margin-top: 12px;
   max-width: 56ch;
+}
+
+@media (min-width: 700px) {
+  .hero__pitch {
+    margin-top: 18px;
+  }
 }
 
 .hero__open {
@@ -470,9 +571,16 @@ p {
 /* Photo taped to the sheet. */
 .photo {
   position: relative;
-  margin: 8px auto 0;
-  width: 208px;
+  margin: 6px 0 0;
+  width: 118px;
   transform: rotate(-1.6deg);
+}
+
+@media (min-width: 700px) {
+  .photo {
+    margin: 8px auto 0;
+    width: 208px;
+  }
 }
 
 .photo img {
@@ -488,38 +596,64 @@ p {
 .photo__tape {
   content: "";
   position: absolute;
-  width: 76px;
-  height: 22px;
+  width: 46px;
+  height: 15px;
   background: color-mix(in srgb, var(--accent) 22%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 .photo::after {
-  top: -12px;
-  left: -16px;
+  top: -8px;
+  left: -10px;
   transform: rotate(-8deg);
 }
 
 .photo__tape {
-  bottom: -12px;
-  right: -14px;
+  bottom: -8px;
+  right: -9px;
   transform: rotate(-6deg);
+}
+
+@media (min-width: 700px) {
+  .photo::after,
+  .photo__tape {
+    width: 76px;
+    height: 22px;
+  }
+
+  .photo::after {
+    top: -12px;
+    left: -16px;
+  }
+
+  .photo__tape {
+    bottom: -12px;
+    right: -14px;
+  }
 }
 
 .cta {
   display: flex;
   flex-wrap: wrap;
   gap: 14px 18px;
-  margin-top: 30px;
+  margin-top: 4px;
+}
+
+@media (min-width: 700px) {
+  .cta {
+    margin-top: 30px;
+  }
 }
 
 .btn {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
   font-family: var(--font-hand);
-  font-size: 22px;
-  line-height: 1;
-  padding: 12px 22px;
+  font-size: 21px;
+  line-height: 1.1;
+  padding: 10px 20px;
   color: var(--ink);
   text-decoration: none;
   background: none;
@@ -549,14 +683,22 @@ p {
   font-family: var(--font-mono);
   /* `--oneline` must not be glued into one glyph: these are real commands. */
   font-variant-ligatures: none;
-  font-size: 14px;
-  line-height: 1.75;
+  font-size: 13px;
+  line-height: 1.7;
   background: #1d2b24;
   color: #eae7dd;
   border-radius: 6px;
-  padding: 22px 22px 18px;
+  padding: 16px 14px 12px;
   overflow-x: auto;
   box-shadow: var(--shadow);
+}
+
+@media (min-width: 560px) {
+  .terminal {
+    font-size: 14px;
+    line-height: 1.75;
+    padding: 22px 22px 18px;
+  }
 }
 
 /* On the chalk surface the board and the page are the same colour, so the
@@ -619,22 +761,39 @@ p {
 
 /* ---------------------------------------------------------------- videos */
 
+/*
+ * One film per row on a phone: a 9:16 poster in half a 375px screen is 154px
+ * wide, and the drawing inside it — the whole point of these films — is then
+ * unreadable. Two columns only from 560px, four only from 1000px, where a
+ * card is still 230px across.
+ */
 .films {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 34px 24px;
-  margin-top: 30px;
+  grid-template-columns: 1fr;
+  gap: 40px 24px;
+  margin-top: 26px;
 }
 
-@media (min-width: 760px) {
+@media (min-width: 560px) {
+  .films {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 34px 24px;
+  }
+
+  .film--landscape {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1000px) {
   .films {
     grid-template-columns: repeat(4, 1fr);
+    margin-top: 30px;
   }
 
   /* The widescreen film gets its own band: a 9:16 grid cell would either
      crop it or leave a hole under it. */
   .film--landscape {
-    grid-column: 1 / -1;
     display: grid;
     grid-template-columns: 1.25fr 1fr;
     gap: 30px;
@@ -693,8 +852,8 @@ p {
 }
 
 .film__play span {
-  width: 62px;
-  height: 62px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   border: 2.2px solid var(--ink);
@@ -743,8 +902,20 @@ p {
 }
 
 .film h3 {
-  margin-top: 16px;
-  font-size: 27px;
+  margin-top: 14px;
+  font-size: 26px;
+}
+
+@media (min-width: 760px) {
+  .film__play span {
+    width: 62px;
+    height: 62px;
+  }
+
+  .film h3 {
+    margin-top: 16px;
+    font-size: 27px;
+  }
 }
 
 .film__surface {
@@ -755,13 +926,21 @@ p {
 }
 
 .film__blurb {
-  font-size: 15.5px;
+  font-size: 16px;
   line-height: 1.55;
 }
 
 .film__link {
   font-family: var(--font-note);
-  font-size: 15px;
+  font-size: 16px;
+}
+
+/* The link is the second way into the film, and on a phone it is a thumb
+   target, not a line of text. */
+.film__link a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 .film__soon {
@@ -915,8 +1094,12 @@ p {
 }
 
 .contact__card a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: 17px;
   word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .contact__card p {

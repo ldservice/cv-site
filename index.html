@@ -94,25 +94,30 @@
   <main id="main" class="sheet">
     <section class="hero" id="top">
       <p class="margin-note">the model writes the code — I write the conditions and the checks</p>
+      <!-- Four grid children, not two: on a phone the photo sits beside the
+           name, on a wide screen it stands next to the whole block. Which is
+           where, is decided by grid-template-areas in the stylesheet. -->
       <div class="hero__grid">
-        <div>
+        <div class="hero__id">
           <p class="hero__hi">Hello, I am</p>
           <h1>Leonid Dymenko</h1>
           <p class="hero__role">AI Workflow Engineer</p>
-          <p class="hero__role-note">LLM-powered automation and backend · Python · n8n · PostgreSQL</p>
-          <p class="hero__location">Kyiv, Ukraine · remote or hybrid</p>
-          <p class="hero__pitch">I build systems where a language model works inside a business process: customer-facing bots, automation of routine operations, content-generation pipelines. In 2026 I took seven projects from an idea to a working stand.</p>
-          <p class="hero__open">Open to a test assignment</p>
-          <div class="cta">
-            <a class="btn btn--primary sketch" href="#video">Watch the video CV</a>
-            <a class="btn sketch sketch--b" href="cv/CV-Dymenko-Leonid-en.pdf" download>Download CV (PDF)</a>
-            <a class="btn sketch sketch--c" href="mailto:dymenko@gmail.com">Write to me</a>
-          </div>
         </div>
         <figure class="photo sketch sketch--b">
           <img src="assets/photo.jpg" alt="Photo: Leonid Dymenko" width="600" height="800">
           <span class="photo__tape" aria-hidden="true"></span>
         </figure>
+        <div class="hero__say">
+          <p class="hero__role-note">LLM-powered automation and backend · Python · n8n · PostgreSQL</p>
+          <p class="hero__location">Kyiv, Ukraine · remote or hybrid</p>
+          <p class="hero__pitch">I build systems where a language model works inside a business process: customer-facing bots, automation of routine operations, content-generation pipelines. In 2026 I took seven projects from an idea to a working stand.</p>
+          <p class="hero__open">Open to a test assignment</p>
+        </div>
+        <div class="cta">
+          <a class="btn btn--primary sketch" href="#video">Watch the video CV</a>
+          <a class="btn sketch sketch--b" href="cv/CV-Dymenko-Leonid-en.pdf" download>Download CV (PDF)</a>
+          <a class="btn sketch sketch--c" href="mailto:dymenko@gmail.com">Write to me</a>
+        </div>
       </div>
     </section>
 

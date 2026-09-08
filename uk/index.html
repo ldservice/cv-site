@@ -94,25 +94,30 @@
   <main id="main" class="sheet">
     <section class="hero" id="top">
       <p class="margin-note">код пише модель — умови й перевірку пишу я</p>
+      <!-- Four grid children, not two: on a phone the photo sits beside the
+           name, on a wide screen it stands next to the whole block. Which is
+           where, is decided by grid-template-areas in the stylesheet. -->
       <div class="hero__grid">
-        <div>
+        <div class="hero__id">
           <p class="hero__hi">Вітаю, я</p>
           <h1>Леонід Димєнко</h1>
           <p class="hero__role">AI Workflow Engineer</p>
-          <p class="hero__role-note">Автоматизація з LLM і бекенд · Python · n8n · PostgreSQL</p>
-          <p class="hero__location">Київ, Україна · віддалено або гібрид</p>
-          <p class="hero__pitch">Будую системи, де мовна модель працює всередині робочого процесу: чат-боти для бізнесу, автоматизація рутинних операцій, конвеєри генерації контенту. За 2026 рік довів до працюючого стенду сім проєктів.</p>
-          <p class="hero__open">Готовий до тестового завдання</p>
-          <div class="cta">
-            <a class="btn btn--primary sketch" href="#video">Подивитися відеорезюме</a>
-            <a class="btn sketch sketch--b" href="../cv/CV-Dymenko-Leonid-uk.pdf" download>Завантажити резюме (PDF)</a>
-            <a class="btn sketch sketch--c" href="mailto:dymenko@gmail.com">Написати мені</a>
-          </div>
         </div>
         <figure class="photo sketch sketch--b">
           <img src="../assets/photo.jpg" alt="Фото: Леонід Димєнко" width="600" height="800">
           <span class="photo__tape" aria-hidden="true"></span>
         </figure>
+        <div class="hero__say">
+          <p class="hero__role-note">Автоматизація з LLM і бекенд · Python · n8n · PostgreSQL</p>
+          <p class="hero__location">Київ, Україна · віддалено або гібрид</p>
+          <p class="hero__pitch">Будую системи, де мовна модель працює всередині робочого процесу: чат-боти для бізнесу, автоматизація рутинних операцій, конвеєри генерації контенту. За 2026 рік довів до працюючого стенду сім проєктів.</p>
+          <p class="hero__open">Готовий до тестового завдання</p>
+        </div>
+        <div class="cta">
+          <a class="btn btn--primary sketch" href="#video">Подивитися відеорезюме</a>
+          <a class="btn sketch sketch--b" href="../cv/CV-Dymenko-Leonid-uk.pdf" download>Завантажити резюме (PDF)</a>
+          <a class="btn sketch sketch--c" href="mailto:dymenko@gmail.com">Написати мені</a>
+        </div>
       </div>
     </section>
 
